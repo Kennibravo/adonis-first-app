@@ -1,0 +1,7 @@
+@if(flashMessage('success'))
+  <h1> {{ flashMessage('success')}} </h1>
+@endif
+
+@if(flashMessage('validationError'))
+  <h1>{{ flashMessage('validationError')}}</h1>
+@endif

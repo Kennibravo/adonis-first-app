@@ -5,17 +5,20 @@ JobPostr - Post your Jobs
 @endsection
 
 @section('content')
-  @include('partials.messages')
   <h1>All Jobs</h1>
 
-  @each(job in jobs)
+
     <div class="job-container">
       <div class="blank"></div>
 
       <div class="job-info">
         <h3>{{ job.title }}</h3>
         <p>{{ job.description }}</p>
+
+        <form action="{{ route('jobs.delete', {id: job.id})}}?_method=DELETE" method="POST">
+          {{ csrfField() }}
+          <button type="submit">Delete Post</button>
+        </form>
       </div>
     </div>
-  @endeach
 @endsection

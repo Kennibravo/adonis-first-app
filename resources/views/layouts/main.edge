@@ -17,8 +17,14 @@
     <nav>
       <ul>
         <li><a href="/">Jobs</a></li>
+        @loggedIn
+          <li><a href="/">HI {{ auth.user.username }}!</a></li>
+          <li><a href="/logout">Logout</a></li>
+        @else
         <li><a href="/login">Login</a></li>
         <li><a href="/signup">Signup</a></li>
+        @endloggedIn
+
       </ul>
     </nav>
   </header>

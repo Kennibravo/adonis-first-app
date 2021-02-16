@@ -16,4 +16,22 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', 'JobController.home');
+Route.group(() => {
+  Route.get('', 'JobController.home').as('jobs.index');
+  Route.get('create', 'JobController.create').as('jobs.create');
+  Route.post('store', 'JobController.store').as('jobs.store');
+  Route.get('show/:id', 'JobController.show').as('jobs.show');
+  Route.get('edit/:id', 'JobController.edit').as('jobs.edit');
+  Route.put('update/:id', 'JobController.update').as('jobs.update');
+  Route.delete('delete/:id', 'JobController.delete').as('jobs.delete');
+}).prefix("jobs").middleware(['userAuth']);
+
+Route.get('logout', 'UserController.logout').as('logout');
+
+Route.group(() => {
+  Route.post('login', 'UserController.login').as('login');
+  Route.get('login', 'UserController.showLogin').as('showLogin');
+
+  Route.get('register', 'UserController.showRegister').as('showRegister');
+  Route.post('register', 'UserController.register').as('register');
+}).prefix('user').middleware(['userGuest']);

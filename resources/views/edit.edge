@@ -1,0 +1,25 @@
+@layout('layouts.main')
+
+@section('title')
+Create a Job - Postr
+@endsection
+
+@section('content')
+  <form action="{{ route('jobs.update', {id: job.id})}}?_method=PUT" method="post">
+    {{ csrfField() }}
+
+    <label for="title">Title</label>
+    <input type="text" name="title" value=" {{ job.title }} ">
+    {{ elIf('<strong>$self</strong>', getErrorFor('title'), hasErrorFor('title')) }}
+
+    <label for="title">Link</label>
+    <input type="text" name="link" value=" {{ job.link }} ">
+    {{ elIf('<strong>$self</strong>', getErrorFor('link'), hasErrorFor('link')) }}
+
+    <label for="description">Description</label>
+    <textarea name="description" cols="30" rows="10">{{ job.description }}</textarea>
+    {{ elIf('<strong>$self</strong>', getErrorFor('description'), hasErrorFor('description')) }}
+
+    <button type="submit">Create</button>
+  </form>
+@endsection
