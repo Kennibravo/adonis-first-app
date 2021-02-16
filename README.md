@@ -1,15 +1,5 @@
-# Adonis fullstack application
+# Adonis first app
 
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
-
-1. Bodyparser
-2. Session
-3. Authentication
-4. Web security middleware
-5. CORS
-6. Edge template engine
-7. Lucid ORM
-8. Migrations and seeds
 
 ## Setup
 
@@ -29,3 +19,9 @@ Run the following command to run startup migrations.
 ```js
 adonis migration:run
 ```
+## features
+1. User and Admin auth system.
+2. Middleware to restrict Users.
+3. User login/registration system
+4. Model CRUD
+5. A Task(command), not functional though.
