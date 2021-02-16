@@ -17,6 +17,10 @@
 const Route = use('Route')
 
 Route.group(() => {
+
+}).prefix('users');
+
+Route.group(() => {
   Route.get('', 'JobController.home').as('jobs.index');
   Route.get('create', 'JobController.create').as('jobs.create');
   Route.post('store', 'JobController.store').as('jobs.store');
@@ -35,3 +39,15 @@ Route.group(() => {
   Route.get('register', 'UserController.showRegister').as('showRegister');
   Route.post('register', 'UserController.register').as('register');
 }).prefix('user').middleware(['userGuest']);
+
+Route.group(() => {
+  Route.post('login', 'AdminController.login').as('admin.login');
+  Route.get('login', 'AdminController.showLogin').as('admin.showLogin');
+
+  Route.get('register', 'AdminController.showRegister').as('admin.showRegister');
+  Route.post('register', 'AdminController.register').as('admin.register');
+}).prefix('admin').middleware('adminGuest');
+
+Route.get('/test/admin', () => {
+  return "You are authenticated";
+}).middleware('adminAuth');

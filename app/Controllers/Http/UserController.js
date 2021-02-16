@@ -55,9 +55,10 @@ class UserController {
 
     const user = new User;
 
-    user.username = request.input('username'),
-      user.email = request.input('email'),
-      user.password = request.input('password');
+    user.username = request.input('username');
+    user.email = request.input('email');
+    user.password = request.input('password');
+    user.dob = new Date().toISOString().slice(0,10);
 
     await user.save();
 
@@ -75,6 +76,27 @@ class UserController {
     await auth.logout();
 
     return response.route('login');
+  }
+
+  async update({ params, response, request, session }) {
+    const validation = validate(request.all(), {
+      password: 'required|max:6',
+      dob: 'required|date'
+    });
+
+    if (validation.fails()) {
+      session
+        .withErrors(validation.messages())
+        .flashExcept('password');
+
+      return response.redirect('back');
+    }
+
+    await User.query().where('id', params.id).update(request.only(['password', 'dob']));
+
+    session.flash({ success: 'User details updated' });
+
+    return response.route('jobs.index');
   }
 }
 

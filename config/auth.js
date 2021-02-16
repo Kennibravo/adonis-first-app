@@ -35,6 +35,14 @@ module.exports = {
     password: 'password'
   },
 
+  session_admin: {
+    serializer: 'lucid',
+    model: 'App/Models/Admin',
+    scheme: 'session',
+    uid: 'email',
+    password: 'password'
+  },
+
   /*
   |--------------------------------------------------------------------------
   | Basic Auth

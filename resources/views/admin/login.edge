@@ -1,0 +1,23 @@
+@layout('layouts.main')
+
+@section('title')
+  Login
+@endsection
+
+@section('content')
+  @include('partials.messages')
+
+  <form action="{{route('admin.login')}}" method="POST">
+    {{ csrfField() }}
+
+    <label for="email">Email</label>
+    <input type="text" name="email" value="{{ old('email', '')}}">
+    {{ elIf('<strong>$self</strong>', getErrorFor('email'), hasErrorFor('email')) }}
+
+    <label for="password">Password</label>
+    <input type="password" name="password">
+    {{ elIf('<strong>$self</strong>', getErrorFor('password'), hasErrorFor('password'))}}
+
+    <input type="submit" value="Login">
+  </form>
+@endsection
