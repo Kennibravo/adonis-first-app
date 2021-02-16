@@ -16,9 +16,9 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.group(() => {
-
-}).prefix('users');
+Route.get('/', ({ response }) => {
+  return response.route('jobs.index');
+});
 
 Route.group(() => {
   Route.get('', 'JobController.home').as('jobs.index');
